@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Receita - Farmácia Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-clinic-medical"></i>
+                Farmácia Digital
+            </div>
+            <ul class="menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="medicamentos.html">Medicamentos</a></li>
+                <li><a href="receita.html" class="active">Enviar Receita</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li id="btn-login"><button onclick="toggleLogin()" class="btn">Entrar</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="upload-receita">
+            <h2>Enviar Receita Médica</h2>
+            <form class="upload-form">
+                <div class="form-group">
+                    <label for="nome">Nome completo:</label>
+                    <input type="text" id="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="receita">Anexar Receita (PDF ou Imagem):</label>
+                    <input type="file" id="receita" accept=".pdf,.jpg,.jpeg,.png" required>
+                </div>
+                <div class="form-group">
+                    <label for="assinatura">Assinatura Digital (opcional):</label>
+                    <input type="file" id="assinatura" accept=".jpg,.jpeg,.png">
+                </div>
+                <div class="form-group">
+                    <label for="observacoes">Observações:</label>
+                    <textarea id="observacoes" rows="4" placeholder="Adicione observações importantes sobre sua receita..."></textarea>
+                </div>
+                <button type="submit" class="btn">Enviar Receita</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+            <p>&copy; 2025 Farmácia Digital. Todos os direitos reservados.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                Farmácia Digital - CNPJ: 00.000.000/0001-00<br>
+                Autorização de Funcionamento: 1.23.456-7
+            </p>
+        </div>
+    </footer>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="toggleLogin()">&times;</button>
+            <h2>Entrar</h2>
+            <form onsubmit="fazerLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">E-mail:</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-senha">Senha:</label>
+                    <input type="password" id="login-senha" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Entrar</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" style="color: var(--primary-color);">Esqueceu sua senha?</a>
+                </p>
+                <p style="text-align: center; margin-top: 0.5rem;">
+                    Não tem uma conta? <a href="registro.html" style="color: var(--primary-color);">Cadastre-se</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mensagens -->
+    <div id="mensagem" class="mensagem"></div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

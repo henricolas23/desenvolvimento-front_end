@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicamentos - Farmácia Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/carrinho.css">
+    <link rel="stylesheet" href="assets/css/payment.css">
+    <link rel="stylesheet" href="assets/css/produtos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-clinic-medical"></i>
+                Farmácia Digital
+            </div>
+            <ul class="menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="medicamentos.html" class="active">Medicamentos</a></li>
+                <li><a href="receita.html">Enviar Receita</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li id="btn-login"><button onclick="toggleLogin()" class="btn">Entrar</button></li>
+                <li>
+                    <div class="carrinho-icone" onclick="toggleMiniCarrinho()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="carrinho-quantidade" id="carrinho-quantidade">0</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="pesquisa" placeholder="Busque por nome do medicamento ou sintoma..." onkeyup="pesquisarMedicamentos()">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="search-filters">
+                <button class="filter-btn active" data-filter="todos">Todos</button>
+                <button class="filter-btn" data-filter="analgesicos">Analgésicos</button>
+                <button class="filter-btn" data-filter="antibioticos">Antibióticos</button>
+                <button class="filter-btn" data-filter="vitaminas">Vitaminas</button>
+                <button class="filter-btn" data-filter="controlados">Controlados</button>
+            </div>
+        </div>
+
+        <section class="produtos">
+            <div class="produto" data-nome="Dipirona" data-categoria="analgesicos" data-sintomas="dor febre">
+                <img src="assets/images/produtos/dipirona.png" alt="Dipirona">
+                <h3>Dipirona 500mg</h3>
+                <p class="produto-descricao">Indicado para dores e febre.</p>
+                <p class="produto-preco">R$ 5,99</p>
+                <button class="btn-adicionar" onclick="adicionarAoCarrinho('dipirona', 'Dipirona 500mg', 5.99)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </div>
+
+            <div class="produto" data-nome="Dorflex" data-categoria="analgesicos" data-sintomas="dor muscular">
+                <img src="assets/images/produtos/dorflex.png" alt="Dorflex">
+                <h3>Dorflex</h3>
+                <p class="produto-descricao">Para dores musculares e tensão.</p>
+                <p class="produto-preco">R$ 12,99</p>
+                <button class="btn-adicionar" onclick="adicionarAoCarrinho('dorflex', 'Dorflex', 12.99)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </div>
+
+            <div class="produto" data-nome="Tylenol" data-categoria="analgesicos" data-sintomas="dor febre">
+                <img src="assets/images/produtos/tylenol.png" alt="Tylenol">
+                <h3>Tylenol 750mg</h3>
+                <p class="produto-descricao">Para dores e febre.</p>
+                <p class="produto-preco">R$ 15,99</p>
+                <button class="btn-adicionar" onclick="adicionarAoCarrinho('tylenol', 'Tylenol 750mg', 15.99)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mini Carrinho -->
+    <div id="mini-carrinho" class="mini-carrinho">
+        <div class="mini-carrinho-header">
+            <h3>Seu Carrinho</h3>
+        </div>
+        <div class="mini-carrinho-lista" id="lista-carrinho">
+        </div>
+        <div class="mini-carrinho-footer">
+            <p id="total-carrinho">Total: R$ 0,00</p>
+            <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="togglePaymentModal()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="toggleLogin()">&times;</button>
+            <h2>Entrar</h2>
+            <form onsubmit="fazerLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">E-mail:</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-senha">Senha:</label>
+                    <input type="password" id="login-senha" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Entrar</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" style="color: var(--primary-color);">Esqueceu sua senha?</a>
+                </p>
+                <p style="text-align: center; margin-top: 0.5rem;">
+                    Não tem uma conta? <a href="registro.html" style="color: var(--primary-color);">Cadastre-se</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Pagamento -->
+    <div id="payment-modal" class="payment-modal">
+        <!-- Conteúdo do modal de pagamento aqui -->
+    </div>
+
+    <!-- Mensagens -->
+    <div id="mensagem" class="mensagem"></div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -359,3 +359,84 @@ function atualizarBotaoLogin() {
         btnLogin.innerHTML = `<button onclick="toggleLogin()" class="btn">Entrar</button>`;
     }
 }
+
+// Sistema de Registro
+function formatarCPF(input) {
+    let value = input.value.replace(/\D/g, '');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    input.value = value;
+}
+
+function formatarTelefone(input) {
+    let value = input.value.replace(/\D/g, '');
+    value = value.replace(/(\d{2})(\d)/, '($1) $2');
+    value = value.replace(/(\d{5})(\d)/, '$1-$2');
+    input.value = value;
+}
+
+function toggleSenhaVisibilidade(button) {
+    const input = button.parentElement.querySelector('input');
+    const icon = button.querySelector('i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+function fazerRegistro(event) {
+    event.preventDefault();
+    
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const cpf = document.getElementById('cpf').value;
+    const telefone = document.getElementById('telefone').value;
+    const senha = document.getElementById('senha').value;
+    const confirmarSenha = document.getElementById('confirmar-senha').value;
+    
+    if (senha !== confirmarSenha) {
+        mostrarMensagem('As senhas não coincidem', 'error');
+        return;
+    }
+    
+    // Aqui você implementaria a lógica real de registro
+    // Por enquanto, vamos apenas simular
+    localStorage.setItem('usuarioRegistrado', JSON.stringify({
+        nome,
+        email,
+        cpf,
+        telefone
+    }));
+    
+    mostrarMensagem('Conta criada com sucesso!');
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 2000);
+}
+
+// Adiciona os eventos quando a página carrega
+document.addEventListener('DOMContentLoaded', () => {
+    // Formata CPF enquanto digita
+    const cpfInput = document.getElementById('cpf');
+    if (cpfInput) {
+        cpfInput.addEventListener('input', () => formatarCPF(cpfInput));
+    }
+    
+    // Formata telefone enquanto digita
+    const telefoneInput = document.getElementById('telefone');
+    if (telefoneInput) {
+        telefoneInput.addEventListener('input', () => formatarTelefone(telefoneInput));
+    }
+    
+    // Adiciona eventos para mostrar/ocultar senha
+    document.querySelectorAll('.toggle-senha').forEach(button => {
+        button.addEventListener('click', () => toggleSenhaVisibilidade(button));
+    });
+});

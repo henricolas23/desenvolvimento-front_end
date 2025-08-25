@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/produtos.css">
     <link rel="stylesheet" href="assets/css/carrinho.css">
     <link rel="stylesheet" href="assets/css/payment.css">
     <script src="assets/js/main.js" defer></script>
@@ -35,9 +36,72 @@
     </header>
 
     <main>
-        <section id="inicio" style="text-align: center; padding: 2rem 0;">
-            <h1 style="color: var(--primary-color); margin-bottom: 1rem;">Bem-vindo à Farmácia Digital</h1>
-            <p style="max-width: 800px; margin: 0 auto 2rem;">Sua farmácia online 24 horas por dia. Encontre medicamentos, vitaminas e produtos de saúde com a comodidade de receber em casa.</p>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Bem-vindo à Farmácia Digital</h1>
+                <p>Sua farmácia online 24 horas por dia. Encontre medicamentos, vitaminas e produtos de saúde com a comodidade de receber em casa.</p>
+                <div class="hero-buttons">
+                    <a href="medicamentos.html" class="btn btn-large">
+                        <i class="fas fa-pills"></i>
+                        Ver Medicamentos
+                    </a>
+                    <a href="receita.html" class="btn btn-large btn-outline">
+                        <i class="fas fa-prescription"></i>
+                        Enviar Receita
+                    </a>
+                </div>
+            </div>
+            <div class="featured-categories">
+                <h2>Categorias em Destaque</h2>
+                <div class="category-grid">
+                    <a href="medicamentos.html?categoria=analgesicos" class="category-card">
+                        <i class="fas fa-tablets"></i>
+                        <h3>Analgésicos</h3>
+                        <p>Alívio para dores</p>
+                    </a>
+                    <a href="medicamentos.html?categoria=antibioticos" class="category-card">
+                        <i class="fas fa-capsules"></i>
+                        <h3>Antibióticos</h3>
+                        <p>Com receita médica</p>
+                    </a>
+                    <a href="medicamentos.html?categoria=vitaminas" class="category-card">
+                        <i class="fas fa-vitamin"></i>
+                        <h3>Vitaminas</h3>
+                        <p>Suplementação diária</p>
+                    </a>
+                    <a href="medicamentos.html?categoria=controlados" class="category-card">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                        <h3>Controlados</h3>
+                        <p>Medicamentos especiais</p>
+                    </a>
+                </div>
+            </div>
+            <div class="services-section">
+                <h2>Nossos Serviços</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-truck"></i>
+                        <h3>Entrega Rápida</h3>
+                        <p>Entregamos em toda a cidade</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-headset"></i>
+                        <h3>Atendimento 24h</h3>
+                        <p>Suporte sempre disponível</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Compra Segura</h3>
+                        <p>Pagamento protegido</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-percentage"></i>
+                        <h3>Melhor Preço</h3>
+                        <p>Preços competitivos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
             
             <div class="search-container">
                 <div class="search-box">
@@ -245,7 +309,9 @@
 
         <section id="medicamentos" class="produtos">
             <article class="produto" data-categoria="analgesicos" data-nome="Dipirona" data-sintomas="dor,febre,dor de cabeça,enxaqueca">
-                <img src="https://via.placeholder.com/200" alt="Dipirona">
+                <div class="produto-imagem-container">
+                    <img src="assets/images/produtos/dipirona.png" alt="Dipirona">
+                </div>
                 <h3>Dipirona 500mg</h3>
                 <span class="produto-categoria">Analgésico</span>
                 <div class="produto-descricao">
@@ -265,7 +331,7 @@
             </article>
 
             <article class="produto" data-categoria="antibioticos" data-nome="Amoxicilina" data-sintomas="infecção,garganta,pneumonia">
-                <img src="https://via.placeholder.com/200" alt="Amoxicilina">
+                <img src="https://www.drogariaminasbrasil.com.br/media/product/b05/amoxicilina-500mg-com-21-capsulas-prati-donaduzzi-05f.jpg" alt="Amoxicilina">
                 <h3>Amoxicilina 500mg</h3>
                 <span class="produto-categoria">Antibiótico</span>
                 <div class="produto-descricao">
@@ -286,7 +352,7 @@
             </article>
 
             <article class="produto" data-categoria="protector-gastrico" data-nome="Omeprazol" data-sintomas="azia,gastrite,refluxo,dor estômago">
-                <img src="https://via.placeholder.com/200" alt="Omeprazol">
+                <img src="https://www.drogariaminasbrasil.com.br/media/product/df4/omeprazol-20mg-com-56-capsulas-medley-7a0.jpg" alt="Omeprazol">
                 <h3>Omeprazol 20mg</h3>
                 <span class="produto-categoria">Protetor Gástrico</span>
                 <div class="produto-descricao">
@@ -306,7 +372,9 @@
             </article>
 
             <article class="produto" data-categoria="analgesicos" data-nome="Paracetamol" data-sintomas="dor,febre,dor de cabeça,gripe">
-                <img src="https://via.placeholder.com/200" alt="Paracetamol">
+                <div class="produto-imagem-container">
+                    <img src="https://www.drogariaminasbrasil.com.br/media/product/9e8/paracetamol-750mg-com-20-comprimidos-ems-981.jpg" alt="Paracetamol">
+                </div>
                 <h3>Paracetamol 750mg</h3>
                 <span class="produto-categoria">Analgésico e Antitérmico</span>
                 <div class="produto-descricao">
@@ -326,7 +394,9 @@
             </article>
 
             <article class="produto" data-categoria="antialergicos" data-nome="Loratadina" data-sintomas="alergia,coriza,espirro,coceira">
-                <img src="https://via.placeholder.com/200" alt="Loratadina">
+                <div class="produto-imagem-container">
+                    <img src="https://www.drogariaminasbrasil.com.br/media/product/912/loratadina-10mg-com-12-comprimidos-cimed-05f.jpg" alt="Loratadina">
+                </div>
                 <h3>Loratadina 10mg</h3>
                 <span class="produto-categoria">Antialérgico</span>
                 <div class="produto-descricao">
@@ -346,7 +416,9 @@
             </article>
 
             <article class="produto" data-categoria="anti-inflamatorios" data-nome="Ibuprofeno" data-sintomas="dor,inflamação,febre,dor muscular">
-                <img src="https://via.placeholder.com/200" alt="Ibuprofeno">
+                <div class="produto-imagem-container">
+                    <img src="https://www.drogariaminasbrasil.com.br/media/product/832/ibuprofeno-600mg-com-20-comprimidos-prati-donaduzzi-d80.jpg" alt="Ibuprofeno">
+                </div>
                 <h3>Ibuprofeno 600mg</h3>
                 <span class="produto-categoria">Anti-inflamatório</span>
                 <div class="produto-descricao">
@@ -366,7 +438,9 @@
             </article>
 
             <article class="produto" data-categoria="vitaminas" data-nome="Vitamina C" data-sintomas="imunidade,antioxidante,gripe">
-                <img src="https://via.placeholder.com/200" alt="Vitamina C">
+                <div class="produto-imagem-container">
+                    <img src="https://www.drogariaminasbrasil.com.br/media/product/62e/vitamina-c-1g-com-10-comprimidos-efervescentes-cimed-9ae.jpg" alt="Vitamina C">
+                </div>
                 <h3>Vitamina C 1000mg</h3>
                 <span class="produto-categoria">Suplemento Vitamínico</span>
                 <div class="produto-descricao">
@@ -399,7 +473,9 @@
             </article>
 
             <article class="produto" data-categoria="vitaminas" data-nome="Complexo B" data-sintomas="energia,disposição,sistema nervoso">
-                <img src="https://via.placeholder.com/200" alt="Complexo B">
+                <div class="produto-imagem-container">
+                    <img src="https://www.drogariaminasbrasil.com.br/media/product/857/complexo-b-com-50-drageas-nestrovit-174.jpg" alt="Complexo B">
+                </div>
                 <h3>Complexo B</h3>
                 <span class="produto-categoria">Suplemento Vitamínico</span>
                 <div class="produto-descricao">
@@ -440,7 +516,9 @@
             </article>
 
             <article class="produto" data-categoria="vitaminas" data-nome="Vitamina D" data-sintomas="imunidade,ossos,disposição">
-                <img src="https://via.placeholder.com/200" alt="Vitamina D">
+                <div class="produto-imagem-container">
+                    <img src="https://www.drogariaminasbrasil.com.br/media/product/31e/vitamina-d-7000ui-com-8-comprimidos-revestidos-mantecorp-farmasa-8c4.jpg" alt="Vitamina D">
+                </div>
                 <h3>Vitamina D 7000UI</h3>
                 <span class="produto-categoria">Suplemento Vitamínico</span>
                 <div class="produto-descricao">
@@ -543,7 +621,7 @@
                     <a href="#" style="color: var(--primary-color);">Esqueceu sua senha?</a>
                 </p>
                 <p style="text-align: center; margin-top: 0.5rem;">
-                    Não tem uma conta? <a href="#" style="color: var(--primary-color);">Cadastre-se</a>
+                    Não tem uma conta? <a href="registro.html" style="color: var(--primary-color);">Cadastre-se</a>
                 </p>
             </form>
         </div>
