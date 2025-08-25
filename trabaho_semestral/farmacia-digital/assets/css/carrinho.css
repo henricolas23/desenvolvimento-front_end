@@ -70,11 +70,122 @@
 
 .mini-carrinho-item {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr auto;
+    grid-template-columns: auto 1fr auto;
     gap: 1rem;
     align-items: center;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 123, 255, 0.1);
+    background: var(--white);
+    margin: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.05);
+    transition: all 0.3s;
+}
+
+.mini-carrinho-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+}
+
+.mini-carrinho-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 123, 255, 0.1);
+}
+
+.mini-carrinho-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.mini-carrinho-nome {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.mini-carrinho-preco {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.mini-carrinho-quantidade {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 123, 255, 0.05);
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.mini-carrinho-quantidade button {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+}
+
+.mini-carrinho-quantidade button.btn-diminuir {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--accent-color);
+}
+
+.mini-carrinho-quantidade button.btn-diminuir:hover {
+    background: var(--accent-color);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+}
+
+.mini-carrinho-quantidade button.btn-aumentar {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--secondary-color);
+}
+
+.mini-carrinho-quantidade button.btn-aumentar:hover {
+    background: var(--secondary-color);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+}
+
+.mini-carrinho-quantidade span {
+    min-width: 30px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.btn-remover {
+    background: rgba(220, 53, 69, 0.1);
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.btn-remover:hover {
+    background: var(--accent-color);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+}
+
+.btn-remover i {
+    font-size: 1.1rem;
 }
 
 .mini-carrinho-footer {

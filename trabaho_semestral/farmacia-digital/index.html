@@ -37,14 +37,225 @@
     <main>
         <section id="inicio" style="text-align: center; padding: 2rem 0;">
             <h1 style="color: var(--primary-color); margin-bottom: 1rem;">Bem-vindo à Farmácia Digital</h1>
-            <p style="max-width: 800px; margin: 0 auto;">Sua farmácia online 24 horas por dia. Encontre medicamentos, vitaminas e produtos de saúde com a comodidade de receber em casa.</p>
+            <p style="max-width: 800px; margin: 0 auto 2rem;">Sua farmácia online 24 horas por dia. Encontre medicamentos, vitaminas e produtos de saúde com a comodidade de receber em casa.</p>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="pesquisa" placeholder="Busque por nome do medicamento ou sintoma..." onkeyup="pesquisarMedicamentos()">
+                    <button class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-filters">
+                    <button class="filter-btn active" data-filter="todos">Todos</button>
+                    <button class="filter-btn" data-filter="analgesicos">Analgésicos</button>
+                    <button class="filter-btn" data-filter="antibioticos">Antibióticos</button>
+                    <button class="filter-btn" data-filter="vitaminas">Vitaminas</button>
+                    <button class="filter-btn" data-filter="controlados">Controlados</button>
+                </div>
+            </div>
         </section>
 
+        <style>
+            .search-container {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .search-box {
+                display: flex;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .search-box input {
+                flex: 1;
+                padding: 1rem;
+                border: 2px solid rgba(0, 123, 255, 0.2);
+                border-radius: 8px;
+                font-size: 1rem;
+                transition: all 0.3s;
+            }
+
+            .search-box input:focus {
+                border-color: var(--primary-color);
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+            }
+
+            .search-button {
+                background: var(--gradient-primary);
+                color: white;
+                border: none;
+                padding: 0 1.5rem;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .search-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+            }
+
+            .search-filters {
+                display: flex;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .filter-btn {
+                background: var(--white);
+                border: 2px solid rgba(0, 123, 255, 0.2);
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .filter-btn:hover,
+            .filter-btn.active {
+                background: var(--primary-color);
+                color: var(--white);
+                border-color: var(--primary-color);
+            }
+
+            .produto-descricao {
+                background: rgba(0, 123, 255, 0.05);
+                padding: 1rem;
+                border-radius: 8px;
+                margin: 1rem 0;
+                font-size: 0.9rem;
+                color: #666;
+            }
+
+            .produto-categoria {
+                display: inline-block;
+                padding: 0.3rem 0.8rem;
+                background: rgba(0, 123, 255, 0.1);
+                color: var(--primary-color);
+                border-radius: 20px;
+                font-size: 0.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .produto-detalhes {
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(0, 123, 255, 0.1);
+            }
+
+            .produto-detalhes strong {
+                color: var(--primary-color);
+            }
+
+            .sem-resultados {
+                width: 100%;
+                padding: 2rem;
+                text-align: center;
+                animation: fadeIn 0.5s ease;
+            }
+
+            .mensagem-busca {
+                background: var(--white);
+                padding: 2rem;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .mensagem-busca i {
+                font-size: 3rem;
+                color: var(--primary-color);
+                margin-bottom: 1rem;
+            }
+
+            .mensagem-busca h3 {
+                color: var(--text-color);
+                margin-bottom: 1rem;
+            }
+
+            .mensagem-busca ul {
+                list-style: none;
+                padding: 0;
+                margin-top: 1rem;
+            }
+
+            .mensagem-busca li {
+                color: var(--primary-color);
+                padding: 0.3rem 0;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes addToCart {
+                0% {
+                    transform: translateY(0);
+                }
+                20% {
+                    transform: translateY(-10px) scale(1.02);
+                }
+                40% {
+                    transform: translateY(0) scale(1);
+                }
+                60% {
+                    transform: translateY(-5px);
+                }
+                80% {
+                    transform: translateY(0);
+                }
+                100% {
+                    transform: translateY(0);
+                }
+            }
+
+            .produto.adicionando-ao-carrinho {
+                animation: addToCart 0.7s ease-in-out;
+            }
+
+            .btn-cart {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .btn-cart:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+            }
+
+            .btn-cart:hover:not(:disabled) {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+            }
+
+            .btn-cart:active:not(:disabled) {
+                transform: translateY(0) scale(0.95);
+            }
+        </style>
+
         <section id="medicamentos" class="produtos">
-            <article class="produto">
+            <article class="produto" data-categoria="analgesicos" data-nome="Dipirona" data-sintomas="dor,febre,dor de cabeça,enxaqueca">
                 <img src="https://via.placeholder.com/200" alt="Dipirona">
                 <h3>Dipirona 500mg</h3>
-                <p>Analgésico e antitérmico</p>
+                <span class="produto-categoria">Analgésico</span>
+                <div class="produto-descricao">
+                    Indicado para alívio da dor e febre. Eficaz no tratamento de dores de cabeça, 
+                    dores musculares, dores de dente e outras condições dolorosas.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 comprimido a cada 6 horas</p>
+                    <p><strong>Contraindicações:</strong> Alergia ao medicamento</p>
+                </div>
                 <p class="estoque">Em estoque: 50 unidades</p>
                 <p class="preco">R$ 5,99</p>
                 <button class="btn btn-cart" onclick="adicionarAoCarrinho('dipirona', 'Dipirona 500mg', 5.99)">
@@ -53,10 +264,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="antibioticos" data-nome="Amoxicilina" data-sintomas="infecção,garganta,pneumonia">
                 <img src="https://via.placeholder.com/200" alt="Amoxicilina">
                 <h3>Amoxicilina 500mg</h3>
-                <p>Antibiótico</p>
+                <span class="produto-categoria">Antibiótico</span>
+                <div class="produto-descricao">
+                    Antibiótico de amplo espectro, eficaz contra diversas infecções bacterianas. 
+                    Comum no tratamento de infecções respiratórias, sinusite, otite e infecções urinárias.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 comprimido a cada 8 horas</p>
+                    <p><strong>Contraindicações:</strong> Alergia a penicilinas</p>
+                </div>
                 <p class="receita-aviso"><i class="fas fa-prescription"></i> Necessita Receita Médica</p>
                 <p class="estoque">Em estoque: 30 unidades</p>
                 <p class="preco">R$ 45,90</p>
@@ -66,10 +285,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="protector-gastrico" data-nome="Omeprazol" data-sintomas="azia,gastrite,refluxo,dor estômago">
                 <img src="https://via.placeholder.com/200" alt="Omeprazol">
                 <h3>Omeprazol 20mg</h3>
-                <p>Protetor Gástrico</p>
+                <span class="produto-categoria">Protetor Gástrico</span>
+                <div class="produto-descricao">
+                    Indicado para tratamento de úlcera, gastrite e refluxo gastroesofágico. 
+                    Reduz a produção de ácido no estômago, aliviando sintomas de queimação e dor.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 cápsula antes do café da manhã</p>
+                    <p><strong>Contraindicações:</strong> Gravidez e amamentação</p>
+                </div>
                 <p class="estoque">Em estoque: 75 unidades</p>
                 <p class="preco">R$ 15,90</p>
                 <button class="btn btn-cart" onclick="adicionarAoCarrinho('omeprazol', 'Omeprazol 20mg', 15.90)">
@@ -78,10 +305,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="analgesicos" data-nome="Paracetamol" data-sintomas="dor,febre,dor de cabeça,gripe">
                 <img src="https://via.placeholder.com/200" alt="Paracetamol">
                 <h3>Paracetamol 750mg</h3>
-                <p>Analgésico e antitérmico</p>
+                <span class="produto-categoria">Analgésico e Antitérmico</span>
+                <div class="produto-descricao">
+                    Medicamento para alívio da dor e redução da febre. Efetivo para dores de cabeça, 
+                    dores musculares e estados gripais. Mais suave para o estômago que outros analgésicos.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 comprimido a cada 6 horas</p>
+                    <p><strong>Contraindicações:</strong> Doença hepática grave</p>
+                </div>
                 <p class="estoque">Em estoque: 100 unidades</p>
                 <p class="preco">R$ 8,90</p>
                 <button class="btn btn-cart" onclick="adicionarAoCarrinho('paracetamol', 'Paracetamol 750mg', 8.90)">
@@ -90,10 +325,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="antialergicos" data-nome="Loratadina" data-sintomas="alergia,coriza,espirro,coceira">
                 <img src="https://via.placeholder.com/200" alt="Loratadina">
                 <h3>Loratadina 10mg</h3>
-                <p>Antialérgico</p>
+                <span class="produto-categoria">Antialérgico</span>
+                <div class="produto-descricao">
+                    Antialérgico que alivia sintomas como espirros, coceira, coriza e congestionamento nasal. 
+                    Não causa sonolência como outros antialérgicos tradicionais.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 comprimido ao dia</p>
+                    <p><strong>Contraindicações:</strong> Doença hepática grave</p>
+                </div>
                 <p class="estoque">Em estoque: 45 unidades</p>
                 <p class="preco">R$ 12,50</p>
                 <button class="btn btn-cart" onclick="adicionarAoCarrinho('loratadina', 'Loratadina 10mg', 12.50)">
@@ -102,10 +345,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="anti-inflamatorios" data-nome="Ibuprofeno" data-sintomas="dor,inflamação,febre,dor muscular">
                 <img src="https://via.placeholder.com/200" alt="Ibuprofeno">
                 <h3>Ibuprofeno 600mg</h3>
-                <p>Anti-inflamatório</p>
+                <span class="produto-categoria">Anti-inflamatório</span>
+                <div class="produto-descricao">
+                    Anti-inflamatório não esteroidal eficaz no tratamento de dores e inflamações. 
+                    Indicado para dores musculares, articulares e menstruais.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 comprimido a cada 8 horas</p>
+                    <p><strong>Contraindicações:</strong> Úlcera gástrica, problemas cardíacos</p>
+                </div>
                 <p class="estoque">Em estoque: 60 unidades</p>
                 <p class="preco">R$ 18,90</p>
                 <button class="btn btn-cart" onclick="adicionarAoCarrinho('ibuprofeno', 'Ibuprofeno 600mg', 18.90)">
@@ -114,10 +365,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="vitaminas" data-nome="Vitamina C" data-sintomas="imunidade,antioxidante,gripe">
                 <img src="https://via.placeholder.com/200" alt="Vitamina C">
                 <h3>Vitamina C 1000mg</h3>
-                <p>Suplemento Vitamínico</p>
+                <span class="produto-categoria">Suplemento Vitamínico</span>
+                <div class="produto-descricao">
+                    Fortalece o sistema imunológico e age como antioxidante. 
+                    Auxilia na absorção de ferro e na formação do colágeno.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 comprimido ao dia</p>
+                    <p><strong>Benefícios:</strong> Imunidade, pele, antioxidante</p>
+                </div>
                 <p class="estoque">Em estoque: 80 unidades</p>
                 <p class="preco">R$ 25,90</p>
                 <button class="btn btn-cart" onclick="adicionarAoCarrinho('vitc', 'Vitamina C 1000mg', 25.90)">
@@ -139,10 +398,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="vitaminas" data-nome="Complexo B" data-sintomas="energia,disposição,sistema nervoso">
                 <img src="https://via.placeholder.com/200" alt="Complexo B">
                 <h3>Complexo B</h3>
-                <p>Suplemento Vitamínico</p>
+                <span class="produto-categoria">Suplemento Vitamínico</span>
+                <div class="produto-descricao">
+                    Conjunto de vitaminas do complexo B essenciais para o metabolismo energético 
+                    e saúde do sistema nervoso. Ajuda a combater o cansaço e estresse.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 comprimido ao dia</p>
+                    <p><strong>Benefícios:</strong> Energia, sistema nervoso, metabolismo</p>
+                </div>
                 <p class="estoque">Em estoque: 65 unidades</p>
                 <p class="preco">R$ 15,50</p>
                 <button class="btn btn-cart" onclick="adicionarAoCarrinho('complexob', 'Complexo B', 15.50)">
@@ -151,10 +418,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="controlados" data-nome="Fluoxetina" data-sintomas="depressão,ansiedade">
                 <img src="https://via.placeholder.com/200" alt="Fluoxetina">
                 <h3>Fluoxetina 20mg</h3>
-                <p>Antidepressivo</p>
+                <span class="produto-categoria">Antidepressivo</span>
+                <div class="produto-descricao">
+                    Antidepressivo da classe dos Inibidores Seletivos da Recaptação de Serotonina (ISRS). 
+                    Indicado para tratamento da depressão e transtorno obsessivo-compulsivo.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 cápsula pela manhã</p>
+                    <p><strong>Contraindicações:</strong> Gravidez, amamentação, uso de IMAO</p>
+                </div>
                 <p class="receita-aviso"><i class="fas fa-prescription"></i> Necessita Receita Médica</p>
                 <p class="estoque">Em estoque: 35 unidades</p>
                 <p class="preco">R$ 39,90</p>
@@ -164,10 +439,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="vitaminas" data-nome="Vitamina D" data-sintomas="imunidade,ossos,disposição">
                 <img src="https://via.placeholder.com/200" alt="Vitamina D">
                 <h3>Vitamina D 7000UI</h3>
-                <p>Suplemento Vitamínico</p>
+                <span class="produto-categoria">Suplemento Vitamínico</span>
+                <div class="produto-descricao">
+                    Essencial para absorção de cálcio e saúde dos ossos. Importante para o sistema 
+                    imunológico e humor. Ajuda a prevenir deficiência de vitamina D.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 cápsula por semana</p>
+                    <p><strong>Benefícios:</strong> Ossos, imunidade, disposição</p>
+                </div>
                 <p class="estoque">Em estoque: 90 unidades</p>
                 <p class="preco">R$ 45,90</p>
                 <button class="btn btn-cart" onclick="adicionarAoCarrinho('vitd', 'Vitamina D 7000UI', 45.90)">
@@ -176,10 +459,18 @@
                 </button>
             </article>
 
-            <article class="produto">
+            <article class="produto" data-categoria="controlados" data-nome="Sertralina" data-sintomas="depressão,ansiedade,pânico">
                 <img src="https://via.placeholder.com/200" alt="Sertralina">
                 <h3>Sertralina 50mg</h3>
-                <p>Antidepressivo</p>
+                <span class="produto-categoria">Antidepressivo</span>
+                <div class="produto-descricao">
+                    Antidepressivo ISRS indicado para depressão, transtorno do pânico e ansiedade social. 
+                    Apresenta menor interação com outros medicamentos comparado a outros antidepressivos.
+                </div>
+                <div class="produto-detalhes">
+                    <p><strong>Dosagem:</strong> 1 comprimido pela manhã</p>
+                    <p><strong>Contraindicações:</strong> Uso de IMAO, gravidez</p>
+                </div>
                 <p class="receita-aviso"><i class="fas fa-prescription"></i> Necessita Receita Médica</p>
                 <p class="estoque">Em estoque: 25 unidades</p>
                 <p class="preco">R$ 42,90</p>

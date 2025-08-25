@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - Farmácia Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/registro.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-clinic-medical"></i>
+                Farmácia Digital
+            </div>
+            <ul class="menu">
+                <li><a href="index.html">Voltar para a Loja</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="registro-container">
+            <div class="registro-header">
+                <h1>Criar sua conta</h1>
+                <p>Junte-se à Farmácia Digital e tenha acesso a ofertas exclusivas</p>
+            </div>
+
+            <div class="registro-progress">
+                <div class="progress-step active" data-step="1">1</div>
+                <div class="progress-step" data-step="2">2</div>
+                <div class="progress-step" data-step="3">3</div>
+            </div>
+
+            <form id="registro-form" onsubmit="return false;">
+                <!-- Etapa 1: Informações Básicas -->
+                <div class="registro-form active" data-step="1">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <div class="input-icon">
+                                <input type="text" id="nome" required>
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <div class="input-icon">
+                                <input type="email" id="email" required>
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpf">CPF</label>
+                            <div class="input-icon">
+                                <input type="text" id="cpf" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div class="form-help">Digite apenas números</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <div class="input-icon">
+                                <input type="tel" id="telefone" required>
+                                <i class="fas fa-phone"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-buttons">
+                        <div></div>
+                        <button class="btn" onclick="proximaEtapa(1)">Próximo <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Etapa 2: Endereço -->
+                <div class="registro-form" data-step="2">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="cep">CEP</label>
+                            <div class="input-icon">
+                                <input type="text" id="cep" required>
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rua">Rua</label>
+                            <input type="text" id="rua" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="numero">Número</label>
+                            <input type="text" id="numero" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="complemento">Complemento</label>
+                            <input type="text" id="complemento">
+                        </div>
+                        <div class="form-group">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" id="bairro" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cidade">Cidade</label>
+                            <input type="text" id="cidade" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <select id="estado" required>
+                                <option value="">Selecione...</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <!-- Adicionar outros estados -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="btn btn-prev" onclick="voltarEtapa(2)"><i class="fas fa-arrow-left"></i> Anterior</button>
+                        <button class="btn" onclick="proximaEtapa(2)">Próximo <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Etapa 3: Senha e Confirmação -->
+                <div class="registro-form" data-step="3">
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <div class="input-icon">
+                            <input type="password" id="senha" required onkeyup="verificarForcaSenha()">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="password-strength">
+                            <div class="password-strength-bar"></div>
+                        </div>
+                        <div class="form-help">
+                            A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmar-senha">Confirmar Senha</label>
+                        <div class="input-icon">
+                            <input type="password" id="confirmar-senha" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" required>
+                            Li e concordo com os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>
+                        </label>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="btn btn-prev" onclick="voltarEtapa(3)"><i class="fas fa-arrow-left"></i> Anterior</button>
+                        <button class="btn" onclick="finalizarCadastro()">Criar Conta</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Mensagem de Sucesso -->
+            <div class="form-success">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2>Cadastro Realizado com Sucesso!</h2>
+                <p>Seja bem-vindo à Farmácia Digital.</p>
+                <a href="index.html" class="btn" style="margin-top: 1rem;">Ir para a Loja</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function proximaEtapa(etapaAtual) {
+            // Validar campos da etapa atual
+            const form = document.querySelector(`.registro-form[data-step="${etapaAtual}"]`);
+            const inputs = form.querySelectorAll('input[required], select[required]');
+            let valido = true;
+
+            inputs.forEach(input => {
+                if (!input.value) {
+                    valido = false;
+                    input.classList.add('invalid');
+                } else {
+                    input.classList.remove('invalid');
+                }
+            });
+
+            if (!valido) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            // Avançar para próxima etapa
+            document.querySelector(`.registro-form[data-step="${etapaAtual}"]`).classList.remove('active');
+            document.querySelector(`.registro-form[data-step="${etapaAtual + 1}"]`).classList.add('active');
+            
+            // Atualizar progresso
+            document.querySelector(`.progress-step[data-step="${etapaAtual}"]`).classList.add('completed');
+            document.querySelector(`.progress-step[data-step="${etapaAtual + 1}"]`).classList.add('active');
+        }
+
+        function voltarEtapa(etapaAtual) {
+            document.querySelector(`.registro-form[data-step="${etapaAtual}"]`).classList.remove('active');
+            document.querySelector(`.registro-form[data-step="${etapaAtual - 1}"]`).classList.add('active');
+            
+            document.querySelector(`.progress-step[data-step="${etapaAtual}"]`).classList.remove('active');
+            document.querySelector(`.progress-step[data-step="${etapaAtual - 1}"]`).classList.remove('completed');
+        }
+
+        function verificarForcaSenha() {
+            const senha = document.getElementById('senha').value;
+            const barra = document.querySelector('.password-strength-bar');
+            
+            // Critérios de força
+            const temNumero = /\d/.test(senha);
+            const temMaiuscula = /[A-Z]/.test(senha);
+            const temMinuscula = /[a-z]/.test(senha);
+            const temEspecial = /[!@#$%^&*]/.test(senha);
+            
+            if (senha.length < 6) {
+                barra.className = 'password-strength-bar weak';
+            } else if (senha.length >= 6 && (temNumero && temMaiuscula) || (temNumero && temMinuscula) || (temMaiuscula && temMinuscula)) {
+                barra.className = 'password-strength-bar medium';
+            } else if (senha.length >= 8 && temNumero && temMaiuscula && temMinuscula && temEspecial) {
+                barra.className = 'password-strength-bar strong';
+            }
+        }
+
+        function finalizarCadastro() {
+            const senha = document.getElementById('senha').value;
+            const confirmarSenha = document.getElementById('confirmar-senha').value;
+
+            if (senha !== confirmarSenha) {
+                alert('As senhas não conferem!');
+                return;
+            }
+
+            // Aqui você implementaria a lógica real de cadastro
+            document.getElementById('registro-form').style.display = 'none';
+            document.querySelector('.form-success').classList.add('active');
+        }
+
+        // Formatação de campos
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length >= 9) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            } else if (value.length >= 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3}?)/, '$1.$2.$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{3})(\d{3}?)/, '$1.$2');
+            }
+            e.target.value = value;
+        });
+
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length >= 7) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 2) {
+                value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+            }
+            e.target.value = value;
+        });
+
+        document.getElementById('cep').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 8) value = value.slice(0, 8);
+            if (value.length >= 5) {
+                value = value.replace(/(\d{5})(\d{3})/, '$1-$2');
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
