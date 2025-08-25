@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmácia Digital - Sua Saúde Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/carrinho.css">
+    <link rel="stylesheet" href="assets/css/payment.css">
+    <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-clinic-medical"></i>
+                Farmácia Digital
+            </div>
+            <ul class="menu">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#medicamentos">Medicamentos</a></li>
+                <li><a href="#receita">Enviar Receita</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li id="btn-login"><button onclick="toggleLogin()" class="btn">Entrar</button></li>
+                <li>
+                    <div class="carrinho-icone" onclick="toggleMiniCarrinho()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="carrinho-quantidade" id="carrinho-quantidade">0</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" style="text-align: center; padding: 2rem 0;">
+            <h1 style="color: var(--primary-color); margin-bottom: 1rem;">Bem-vindo à Farmácia Digital</h1>
+            <p style="max-width: 800px; margin: 0 auto;">Sua farmácia online 24 horas por dia. Encontre medicamentos, vitaminas e produtos de saúde com a comodidade de receber em casa.</p>
+        </section>
+
+        <section id="medicamentos" class="produtos">
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Dipirona">
+                <h3>Dipirona 500mg</h3>
+                <p>Analgésico e antitérmico</p>
+                <p class="estoque">Em estoque: 50 unidades</p>
+                <p class="preco">R$ 5,99</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('dipirona', 'Dipirona 500mg', 5.99)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Amoxicilina">
+                <h3>Amoxicilina 500mg</h3>
+                <p>Antibiótico</p>
+                <p class="receita-aviso"><i class="fas fa-prescription"></i> Necessita Receita Médica</p>
+                <p class="estoque">Em estoque: 30 unidades</p>
+                <p class="preco">R$ 45,90</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('amoxicilina', 'Amoxicilina 500mg', 45.90)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Omeprazol">
+                <h3>Omeprazol 20mg</h3>
+                <p>Protetor Gástrico</p>
+                <p class="estoque">Em estoque: 75 unidades</p>
+                <p class="preco">R$ 15,90</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('omeprazol', 'Omeprazol 20mg', 15.90)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Paracetamol">
+                <h3>Paracetamol 750mg</h3>
+                <p>Analgésico e antitérmico</p>
+                <p class="estoque">Em estoque: 100 unidades</p>
+                <p class="preco">R$ 8,90</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('paracetamol', 'Paracetamol 750mg', 8.90)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Loratadina">
+                <h3>Loratadina 10mg</h3>
+                <p>Antialérgico</p>
+                <p class="estoque">Em estoque: 45 unidades</p>
+                <p class="preco">R$ 12,50</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('loratadina', 'Loratadina 10mg', 12.50)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Ibuprofeno">
+                <h3>Ibuprofeno 600mg</h3>
+                <p>Anti-inflamatório</p>
+                <p class="estoque">Em estoque: 60 unidades</p>
+                <p class="preco">R$ 18,90</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('ibuprofeno', 'Ibuprofeno 600mg', 18.90)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Vitamina C">
+                <h3>Vitamina C 1000mg</h3>
+                <p>Suplemento Vitamínico</p>
+                <p class="estoque">Em estoque: 80 unidades</p>
+                <p class="preco">R$ 25,90</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('vitc', 'Vitamina C 1000mg', 25.90)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Dexametasona">
+                <h3>Dexametasona 4mg</h3>
+                <p>Anti-inflamatório Corticoide</p>
+                <p class="receita-aviso"><i class="fas fa-prescription"></i> Necessita Receita Médica</p>
+                <p class="estoque">Em estoque: 40 unidades</p>
+                <p class="preco">R$ 32,90</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('dexametasona', 'Dexametasona 4mg', 32.90)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Complexo B">
+                <h3>Complexo B</h3>
+                <p>Suplemento Vitamínico</p>
+                <p class="estoque">Em estoque: 65 unidades</p>
+                <p class="preco">R$ 15,50</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('complexob', 'Complexo B', 15.50)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Fluoxetina">
+                <h3>Fluoxetina 20mg</h3>
+                <p>Antidepressivo</p>
+                <p class="receita-aviso"><i class="fas fa-prescription"></i> Necessita Receita Médica</p>
+                <p class="estoque">Em estoque: 35 unidades</p>
+                <p class="preco">R$ 39,90</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('fluoxetina', 'Fluoxetina 20mg', 39.90)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Vitamina D">
+                <h3>Vitamina D 7000UI</h3>
+                <p>Suplemento Vitamínico</p>
+                <p class="estoque">Em estoque: 90 unidades</p>
+                <p class="preco">R$ 45,90</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('vitd', 'Vitamina D 7000UI', 45.90)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+
+            <article class="produto">
+                <img src="https://via.placeholder.com/200" alt="Sertralina">
+                <h3>Sertralina 50mg</h3>
+                <p>Antidepressivo</p>
+                <p class="receita-aviso"><i class="fas fa-prescription"></i> Necessita Receita Médica</p>
+                <p class="estoque">Em estoque: 25 unidades</p>
+                <p class="preco">R$ 42,90</p>
+                <button class="btn btn-cart" onclick="adicionarAoCarrinho('sertralina', 'Sertralina 50mg', 42.90)">
+                    <i class="fas fa-cart-plus"></i>
+                    Adicionar ao Carrinho
+                </button>
+            </article>
+        </section>
+
+        <section id="receita" class="upload-receita">
+            <h2>Enviar Receita Médica</h2>
+            <form class="upload-form">
+                <div class="form-group">
+                    <label for="nome">Nome completo:</label>
+                    <input type="text" id="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="receita">Anexar Receita (PDF ou Imagem):</label>
+                    <input type="file" id="receita" accept=".pdf,.jpg,.jpeg,.png" required>
+                </div>
+                <div class="form-group">
+                    <label for="assinatura">Assinatura Digital (opcional):</label>
+                    <input type="file" id="assinatura" accept=".jpg,.jpeg,.png">
+                </div>
+                <button type="submit" class="btn">Enviar Receita</button>
+            </form>
+        </section>
+
+        <section id="contato" style="margin-top: 3rem; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">Entre em Contato</h2>
+            <p><strong>Telefone:</strong> (11) 1234-5678</p>
+            <p><strong>WhatsApp:</strong> (11) 98765-4321</p>
+            <p><strong>Email:</strong> contato@farmaciadigital.com</p>
+            <p><strong>Horário de Atendimento:</strong> Segunda a Domingo, 24 horas</p>
+            <p><strong>Endereço:</strong> Av. Principal, 1000 - Centro</p>
+        </section>
+    </main>
+
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+            <p>&copy; 2025 Farmácia Digital. Todos os direitos reservados.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                Farmácia Digital - CNPJ: 00.000.000/0001-00<br>
+                Autorização de Funcionamento: 1.23.456-7
+            </p>
+        </div>
+    </footer>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="toggleLogin()">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;">Entrar</h2>
+            <form onsubmit="fazerLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">E-mail:</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-senha">Senha:</label>
+                    <input type="password" id="login-senha" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Entrar</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" style="color: var(--primary-color);">Esqueceu sua senha?</a>
+                </p>
+                <p style="text-align: center; margin-top: 0.5rem;">
+                    Não tem uma conta? <a href="#" style="color: var(--primary-color);">Cadastre-se</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mini Carrinho -->
+    <div id="mini-carrinho" class="mini-carrinho">
+        <div class="mini-carrinho-header">
+            <h3>Seu Carrinho</h3>
+        </div>
+        <div class="mini-carrinho-lista" id="lista-carrinho">
+            <!-- Items do carrinho serão inseridos aqui via JavaScript -->
+        </div>
+        <div class="mini-carrinho-footer">
+            <p id="total-carrinho">Total: R$ 0,00</p>
+            <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="togglePaymentModal()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Pagamento -->
+    <div id="payment-modal" class="payment-modal">
+        <div class="payment-content">
+            <button class="payment-close" onclick="togglePaymentModal()">&times;</button>
+            <div class="payment-header">
+                <h2>Finalizar Compra</h2>
+                <p>Escolha seu método de pagamento preferido</p>
+            </div>
+            
+            <div class="payment-methods">
+                <div class="payment-method" data-method="credit" onclick="selecionarMetodoPagamento('credit')">
+                    <i class="fas fa-credit-card"></i>
+                    <div>
+                        <h3>Cartão de Crédito</h3>
+                        <p>Pague em até 12x</p>
+                    </div>
+                </div>
+                
+                <div class="payment-method" data-method="debit" onclick="selecionarMetodoPagamento('debit')">
+                    <i class="fas fa-credit-card"></i>
+                    <div>
+                        <h3>Cartão de Débito</h3>
+                        <p>Débito direto em conta</p>
+                    </div>
+                </div>
+                
+                <div class="payment-method" data-method="pix" onclick="selecionarMetodoPagamento('pix')">
+                    <i class="fas fa-qrcode"></i>
+                    <div>
+                        <h3>PIX</h3>
+                        <p>Pagamento instantâneo</p>
+                    </div>
+                </div>
+                
+                <div class="payment-method" data-method="boleto" onclick="selecionarMetodoPagamento('boleto')">
+                    <i class="fas fa-barcode"></i>
+                    <div>
+                        <h3>Boleto Bancário</h3>
+                        <p>Vencimento em 3 dias úteis</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="credit-details" class="payment-details">
+                <form onsubmit="finalizarCompra(event)">
+                    <div class="form-group">
+                        <label>Número do Cartão</label>
+                        <input type="text" maxlength="19" oninput="formatarCartao(this)" placeholder="0000 0000 0000 0000" required>
+                    </div>
+                    
+                    <div class="card-grid">
+                        <div class="form-group">
+                            <label>Validade</label>
+                            <input type="text" maxlength="5" oninput="formatarValidade(this)" placeholder="MM/AA" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" maxlength="3" placeholder="123" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nome no Cartão</label>
+                        <input type="text" placeholder="Como está no cartão" required>
+                    </div>
+                    
+                    <div class="installments">
+                        <label>Parcelas</label>
+                        <select id="installments" required>
+                            <option value="1">1x sem juros</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%; margin-top: 1.5rem;">Confirmar Pagamento</button>
+                </form>
+            </div>
+
+            <div id="debit-details" class="payment-details">
+                <form onsubmit="finalizarCompra(event)">
+                    <div class="form-group">
+                        <label>Número do Cartão</label>
+                        <input type="text" maxlength="19" oninput="formatarCartao(this)" placeholder="0000 0000 0000 0000" required>
+                    </div>
+                    
+                    <div class="card-grid">
+                        <div class="form-group">
+                            <label>Validade</label>
+                            <input type="text" maxlength="5" oninput="formatarValidade(this)" placeholder="MM/AA" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" maxlength="3" placeholder="123" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nome no Cartão</label>
+                        <input type="text" placeholder="Como está no cartão" required>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%; margin-top: 1.5rem;">Confirmar Pagamento</button>
+                </form>
+            </div>
+
+            <div id="pix-details" class="payment-details">
+                <div style="text-align: center;">
+                    <img src="https://via.placeholder.com/200" alt="QR Code PIX" style="margin: 1rem 0;">
+                    <p>Escaneie o QR Code ou copie o código PIX abaixo:</p>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <input type="text" value="00020126580014br.gov.bcb.pix0136" readonly>
+                        <button class="btn" onclick="copiarPix()" style="margin-top: 0.5rem;">Copiar Código</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="boleto-details" class="payment-details">
+                <div style="text-align: center;">
+                    <i class="fas fa-file-pdf" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    <p style="margin: 1rem 0;">Clique no botão abaixo para gerar seu boleto:</p>
+                    <button class="btn" onclick="gerarBoleto()">Gerar Boleto</button>
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <h3>Resumo da Compra</h3>
+                <div class="summary-item">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">R$ 0,00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Frete:</span>
+                    <span>Grátis</span>
+                </div>
+                <div class="total-price">
+                    <span>Total:</span>
+                    <span id="total-final">R$ 0,00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensagens -->
+    <div id="mensagem" class="mensagem"></div>
+</body>
+</html>
